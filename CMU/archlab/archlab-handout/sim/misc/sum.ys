@@ -1,0 +1,24 @@
+# vi:syntax=asm
+# Sample linked list
+	.align 8
+ele1:
+	.quad 0x00a
+	.quad ele2
+ele2:
+	.quad 0x0b0
+	.quad ele3
+ele3:
+	.quad 0xc00
+	.quad 0
+
+init:
+	irmovl Stack, %rsp;		# Set up stack pointer
+	irmovl Stack, %ebp;		# Set up base pointer
+	call Main;				# Execute main program
+	halt
+
+Main:
+	
+
+loop:
+	

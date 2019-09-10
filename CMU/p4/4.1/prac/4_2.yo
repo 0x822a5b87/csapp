@@ -1,0 +1,3 @@
+irmovq $-4, %rbx
+rmmovq %rsi, 0x800(%rbx)
+halt
