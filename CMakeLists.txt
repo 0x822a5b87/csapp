@@ -3,8 +3,10 @@ project(csapp)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES CMU/p1_course_overview/memery_bug.cpp
-                 CMU/)
+set(SOURCE_FILES
+        CMU/p1_course_overview/memery_bug.cpp
+        CMU/p7/memery_bug.c
+        CMU/
+        offer)
 
 add_executable(csapp ${SOURCE_FILES})
-
