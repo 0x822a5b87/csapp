@@ -26,7 +26,6 @@
 #include "iostream"
 #include "ds/BinaryTreeNode.cpp"
 
-int *preOrderStart, *inOrderStart;
 
 BinaryTreeNode *do_construct(int *preOrderBegin, int *preOrderEnd,
                              int *inOrderBegin, int *inOrderEnd)
@@ -114,9 +113,6 @@ void Test1()
 
     int preorder[length] = {1, 2, 4, 7, 3, 5, 6, 8};
     int inorder[length]  = {4, 7, 2, 1, 5, 3, 8, 6};
-
-    preOrderStart = preorder;
-    inOrderStart  = inorder;
 
     Test("Test1", preorder, inorder, length);
 }

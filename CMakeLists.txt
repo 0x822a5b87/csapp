@@ -11,3 +11,4 @@ set(SOURCE_FILES
 
 add_executable(csapp ${SOURCE_FILES})
 add_executable(exec07 offer/ch02/exec07.cpp)
+add_executable(exec08 offer/ch02/exec08.cpp)
