@@ -7,11 +7,9 @@ set(SOURCE_FILES
         CMU/p1_course_overview/memery_bug.cpp
         CMU/p7/memery_bug.c
         CMU/
-        offer)
+        offer
+        leetcode)
 
 add_executable(csapp ${SOURCE_FILES})
-add_executable(exec07 offer/ch02/exec07.cpp)
-add_executable(exec08 offer/ch02/exec08.cpp)
-add_executable(exec11 offer/ch02/exec11.cpp)
-add_executable(exec12 offer/ch02/exec12.cpp)
-add_executable(exec13 offer/ch02/exec13.cpp)
+add_executable(offer offer/ch02/exec14.cpp)
+add_executable(leetcode leetcode/easy/_709.cpp)
