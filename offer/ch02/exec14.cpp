@@ -3,7 +3,7 @@
 //
 // 面试题14：剪绳子
 // 给一根长度为 n 的绳子，把绳子剪成 m 段，求剪断的绳子的最大乘积是多少
-
+#include <complex>
 #include "iostream"
 
 //==============================================================================================================================
@@ -141,7 +141,34 @@ int maxProductAfterCutting_solution1(int length)
 
 int maxProductAfterCutting_solution2(int length)
 {
-    return 0;
+    if (length < 2)
+    {
+        return 0;
+    }
+
+    if (length == 2)
+    {
+        return 1;
+    }
+
+    if (length == 3)
+    {
+        return 2;
+    }
+
+    int timesOfThree = length / 3;
+    if (length - timesOfThree * 3 == 1)
+    {
+        timesOfThree = 1;
+    }
+    if (length - timesOfThree * 3 == 1)
+    {
+        timesOfThree = 1;
+    }
+
+    int timesOf2 = (length - timesOfThree * 3) / 2;
+
+    return (int) (pow(3, timesOfThree)) * (int) (pow(2, timesOf2));
 }
 
 // ====================测试代码====================
@@ -153,11 +180,11 @@ void test(const char* testName, int length, int expected)
     else
         std::cout << "Solution1 for " << testName << " FAILED." << std::endl;
 
-//    int result2 = maxProductAfterCutting_solution2(length);
-//    if(result2 == expected)
-//        std::cout << "Solution2 for " << testName << " passed." << std::endl;
-//    else
-//        std::cout << "Solution2 for " << testName << " FAILED." << std::endl;
+    int result2 = maxProductAfterCutting_solution2(length);
+    if(result2 == expected)
+        std::cout << "Solution2 for " << testName << " passed." << std::endl;
+    else
+        std::cout << "Solution2 for " << testName << " FAILED." << std::endl;
 }
 
 void test1()
