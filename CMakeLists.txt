@@ -11,5 +11,5 @@ set(SOURCE_FILES
         leetcode)
 
 add_executable(csapp ${SOURCE_FILES})
-add_executable(offer offer/ch03/exec18.cpp)
+add_executable(offer offer/ch03/exec21.cpp)
 add_executable(leetcode leetcode/easy/_709.cpp)
