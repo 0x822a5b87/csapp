@@ -2,9 +2,9 @@
 // Created by 杜航宇 on 2019-09-17.
 //
 
-#include "BinaryTreeNode.hpp"
+#include "BinaryTreeNode2.hpp"
 
-void PreOrderTraversal(const BinaryTreeNode *root)
+void PreOrderTraversal(const BinaryTreeNode2 *root)
 {
     if (root == nullptr)
     {
@@ -15,7 +15,7 @@ void PreOrderTraversal(const BinaryTreeNode *root)
     PreOrderTraversal(root->right);
 }
 
-void InOrderTraversal(const BinaryTreeNode *root)
+void InOrderTraversal(const BinaryTreeNode2 *root)
 {
     if (root == nullptr)
     {
@@ -26,7 +26,7 @@ void InOrderTraversal(const BinaryTreeNode *root)
     InOrderTraversal(root->right);
 }
 
-void PostOrderTraversal(const BinaryTreeNode *root)
+void PostOrderTraversal(const BinaryTreeNode2 *root)
 {
     if (root == nullptr)
     {
@@ -37,7 +37,7 @@ void PostOrderTraversal(const BinaryTreeNode *root)
     std::cout << root->value << " ";
 }
 
-bool BinaryTreeNode::operator==(const BinaryTreeNode &rhs) const
+bool BinaryTreeNode2::operator==(const BinaryTreeNode2 &rhs) const
 {
     bool cr = (value == rhs.value);
     bool cl = comparePoint(left, rhs.left);
@@ -48,21 +48,21 @@ bool BinaryTreeNode::operator==(const BinaryTreeNode &rhs) const
     return cr && cl && cri;
 }
 
-bool BinaryTreeNode::operator!=(const BinaryTreeNode &rhs) const
+bool BinaryTreeNode2::operator!=(const BinaryTreeNode2 &rhs) const
 {
     return !(rhs == *this);
 }
 
-BinaryTreeNode::BinaryTreeNode(int value, BinaryTreeNode *left, BinaryTreeNode *right) : value(value), left(left),
+BinaryTreeNode2::BinaryTreeNode2(int value, BinaryTreeNode2 *left, BinaryTreeNode2 *right) : value(value), left(left),
                                                                                          right(right)
 {}
 
-BinaryTreeNode::BinaryTreeNode()
+BinaryTreeNode2::BinaryTreeNode2()
 {}
 
-BinaryTreeNode::~BinaryTreeNode() = default;
+BinaryTreeNode2::~BinaryTreeNode2() = default;
 
-void PrintTreeNode(const BinaryTreeNode* pNode)
+void PrintTreeNode(const BinaryTreeNode2* pNode)
 {
     if(pNode != nullptr)
     {
@@ -86,7 +86,7 @@ void PrintTreeNode(const BinaryTreeNode* pNode)
     printf("\n");
 }
 
-void PrintTree(const BinaryTreeNode* pRoot)
+void PrintTree(const BinaryTreeNode2* pRoot)
 {
     PrintTreeNode(pRoot);
 
@@ -100,12 +100,12 @@ void PrintTree(const BinaryTreeNode* pRoot)
     }
 }
 
-void DestroyTree(BinaryTreeNode* pRoot)
+void DestroyTree(BinaryTreeNode2* pRoot)
 {
     if(pRoot != nullptr)
     {
-        BinaryTreeNode* pLeft = pRoot->left;
-        BinaryTreeNode* pRight = pRoot->right;
+        BinaryTreeNode2* pLeft = pRoot->left;
+        BinaryTreeNode2* pRight = pRoot->right;
 
         delete pRoot;
         pRoot = nullptr;
@@ -115,7 +115,7 @@ void DestroyTree(BinaryTreeNode* pRoot)
     }
 }
 
-bool BinaryTreeNode::comparePoint(const BinaryTreeNode *lhs, const BinaryTreeNode *rhs) const
+bool BinaryTreeNode2::comparePoint(const BinaryTreeNode2 *lhs, const BinaryTreeNode2 *rhs) const
 {
     if (lhs == nullptr && rhs == nullptr)
     {
@@ -133,14 +133,14 @@ bool BinaryTreeNode::comparePoint(const BinaryTreeNode *lhs, const BinaryTreeNod
 
 //int main()
 //{
-//    BinaryTreeNode root = {}, left = {}, right = {};
+//    BinaryTreeNode2 root = {}, left = {}, right = {};
 //    root.value  = 4;
 //    left.value  = 2;
 //    right.value = 5;
 //    root.left   = &left;
 //    root.right  = &right;
 //
-//    BinaryTreeNode left_left = {}, left_right = {};
+//    BinaryTreeNode2 left_left = {}, left_right = {};
 //    left_left.value  = 1;
 //    left_right.value = 3;
 //    root.left->left  = &left_left;

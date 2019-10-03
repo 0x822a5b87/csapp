@@ -5,12 +5,12 @@
 
 #include "iostream"
 
-struct BinaryTreeNode
+struct BinaryTreeNode2
 {
     int            value;
-    BinaryTreeNode *left;
-    BinaryTreeNode *right;
-    BinaryTreeNode *parent;
+    BinaryTreeNode2 *left;
+    BinaryTreeNode2 *right;
+    BinaryTreeNode2 *parent;
 };
 
 // 普通二叉树
@@ -32,21 +32,21 @@ struct BinaryTreeNode
 // 3. 如果一个节点既没有右子树，并且还是它父节点的右子节点：那么我们遍历它的父节点，直到找到某一个节点
 // 这个节点是一个左子节点，那么它的下一个节点是找到的这个节点的父节点。如果找不到这个节点，那么它的下一个节点为 nullptr
 
-bool isLeftNode(BinaryTreeNode *node)
+bool isLeftNode(BinaryTreeNode2 *node)
 {
     return node != nullptr
            && node->parent != nullptr
            && node == node->parent->left;
 }
 
-bool isRightNode(BinaryTreeNode *node)
+bool isRightNode(BinaryTreeNode2 *node)
 {
     return node != nullptr
            && node->parent != nullptr
            && node == node->parent->right;
 }
 
-BinaryTreeNode *GetNext(BinaryTreeNode *node)
+BinaryTreeNode2 *GetNext(BinaryTreeNode2 *node)
 {
     if (node == nullptr)
     {
@@ -54,7 +54,7 @@ BinaryTreeNode *GetNext(BinaryTreeNode *node)
     }
     else if (node->right != nullptr)
     {
-        BinaryTreeNode *result = node->right;
+        BinaryTreeNode2 *result = node->right;
         while (result->left != nullptr)
         {
             result = result->left;
@@ -67,7 +67,7 @@ BinaryTreeNode *GetNext(BinaryTreeNode *node)
     }
     else
     {
-        BinaryTreeNode *parent = node;
+        BinaryTreeNode2 *parent = node;
         while ((parent = parent->parent) != nullptr)
         {
             if (isLeftNode(parent))
@@ -80,7 +80,7 @@ BinaryTreeNode *GetNext(BinaryTreeNode *node)
     return nullptr;
 }
 
-BinaryTreeNode *GetNextPro(BinaryTreeNode *node)
+BinaryTreeNode2 *GetNextPro(BinaryTreeNode2 *node)
 {
     if (node == nullptr)
     {
@@ -90,7 +90,7 @@ BinaryTreeNode *GetNextPro(BinaryTreeNode *node)
     // node != nullptr
     if (node->right != nullptr)
     {
-        BinaryTreeNode *result = node->right;
+        BinaryTreeNode2 *result = node->right;
         while (result->left != nullptr)
         {
             result = result->left;
@@ -108,7 +108,7 @@ BinaryTreeNode *GetNextPro(BinaryTreeNode *node)
     // node != nullptr
     // && node.right == nullptr
     // && !isLeftNode(node)
-    BinaryTreeNode *parent = node;
+    BinaryTreeNode2 *parent = node;
     while ((parent = parent->parent) != nullptr)
     {
         if (isLeftNode(parent))
@@ -122,9 +122,9 @@ BinaryTreeNode *GetNextPro(BinaryTreeNode *node)
 
 
 // ==================== 辅助代码用来构建二叉树 ====================
-BinaryTreeNode *CreateBinaryTreeNode(int value)
+BinaryTreeNode2 *CreateBinaryTreeNode(int value)
 {
-    BinaryTreeNode *pNode = new BinaryTreeNode();
+    BinaryTreeNode2 *pNode = new BinaryTreeNode2();
     pNode->value  = value;
     pNode->left   = nullptr;
     pNode->right  = nullptr;
@@ -133,7 +133,7 @@ BinaryTreeNode *CreateBinaryTreeNode(int value)
     return pNode;
 }
 
-void ConnectTreeNodes(BinaryTreeNode *pParent, BinaryTreeNode *pLeft, BinaryTreeNode *pRight)
+void ConnectTreeNodes(BinaryTreeNode2 *pParent, BinaryTreeNode2 *pLeft, BinaryTreeNode2 *pRight)
 {
     if (pParent != nullptr)
     {
@@ -147,7 +147,7 @@ void ConnectTreeNodes(BinaryTreeNode *pParent, BinaryTreeNode *pLeft, BinaryTree
     }
 }
 
-void PrintTreeNode(BinaryTreeNode *pNode)
+void PrintTreeNode(BinaryTreeNode2 *pNode)
 {
     if (pNode != nullptr)
     {
@@ -171,7 +171,7 @@ void PrintTreeNode(BinaryTreeNode *pNode)
     printf("\n");
 }
 
-void PrintTree(BinaryTreeNode *pRoot)
+void PrintTree(BinaryTreeNode2 *pRoot)
 {
     PrintTreeNode(pRoot);
 
@@ -185,12 +185,12 @@ void PrintTree(BinaryTreeNode *pRoot)
     }
 }
 
-void DestroyTree(BinaryTreeNode *pRoot)
+void DestroyTree(BinaryTreeNode2 *pRoot)
 {
     if (pRoot != nullptr)
     {
-        BinaryTreeNode *pLeft  = pRoot->left;
-        BinaryTreeNode *pRight = pRoot->right;
+        BinaryTreeNode2 *pLeft  = pRoot->left;
+        BinaryTreeNode2 *pRight = pRoot->right;
 
         delete pRoot;
         pRoot = nullptr;
@@ -201,12 +201,12 @@ void DestroyTree(BinaryTreeNode *pRoot)
 }
 
 // ==================== 测试代码 ====================
-void Test(char *testName, BinaryTreeNode *pNode, BinaryTreeNode *expected)
+void Test(char *testName, BinaryTreeNode2 *pNode, BinaryTreeNode2 *expected)
 {
     if (testName != nullptr)
         printf("%s begins: ", testName);
 
-    BinaryTreeNode *pNext = GetNext(pNode);
+    BinaryTreeNode2 *pNext = GetNext(pNode);
     if (pNext == expected)
         printf("Passed.\n");
     else
@@ -218,13 +218,13 @@ void Test(char *testName, BinaryTreeNode *pNode, BinaryTreeNode *expected)
 //       5 7    9  11
 void Test1_7()
 {
-    BinaryTreeNode *pNode8  = CreateBinaryTreeNode(8);
-    BinaryTreeNode *pNode6  = CreateBinaryTreeNode(6);
-    BinaryTreeNode *pNode10 = CreateBinaryTreeNode(10);
-    BinaryTreeNode *pNode5  = CreateBinaryTreeNode(5);
-    BinaryTreeNode *pNode7  = CreateBinaryTreeNode(7);
-    BinaryTreeNode *pNode9  = CreateBinaryTreeNode(9);
-    BinaryTreeNode *pNode11 = CreateBinaryTreeNode(11);
+    BinaryTreeNode2 *pNode8  = CreateBinaryTreeNode(8);
+    BinaryTreeNode2 *pNode6  = CreateBinaryTreeNode(6);
+    BinaryTreeNode2 *pNode10 = CreateBinaryTreeNode(10);
+    BinaryTreeNode2 *pNode5  = CreateBinaryTreeNode(5);
+    BinaryTreeNode2 *pNode7  = CreateBinaryTreeNode(7);
+    BinaryTreeNode2 *pNode9  = CreateBinaryTreeNode(9);
+    BinaryTreeNode2 *pNode11 = CreateBinaryTreeNode(11);
 
     ConnectTreeNodes(pNode8, pNode6, pNode10);
     ConnectTreeNodes(pNode6, pNode5, pNode7);
@@ -247,10 +247,10 @@ void Test1_7()
 //      2
 void Test8_11()
 {
-    BinaryTreeNode *pNode5 = CreateBinaryTreeNode(5);
-    BinaryTreeNode *pNode4 = CreateBinaryTreeNode(4);
-    BinaryTreeNode *pNode3 = CreateBinaryTreeNode(3);
-    BinaryTreeNode *pNode2 = CreateBinaryTreeNode(2);
+    BinaryTreeNode2 *pNode5 = CreateBinaryTreeNode(5);
+    BinaryTreeNode2 *pNode4 = CreateBinaryTreeNode(4);
+    BinaryTreeNode2 *pNode3 = CreateBinaryTreeNode(3);
+    BinaryTreeNode2 *pNode2 = CreateBinaryTreeNode(2);
 
     ConnectTreeNodes(pNode5, pNode4, nullptr);
     ConnectTreeNodes(pNode4, pNode3, nullptr);
@@ -270,10 +270,10 @@ void Test8_11()
 //           5
 void Test12_15()
 {
-    BinaryTreeNode *pNode2 = CreateBinaryTreeNode(2);
-    BinaryTreeNode *pNode3 = CreateBinaryTreeNode(3);
-    BinaryTreeNode *pNode4 = CreateBinaryTreeNode(4);
-    BinaryTreeNode *pNode5 = CreateBinaryTreeNode(5);
+    BinaryTreeNode2 *pNode2 = CreateBinaryTreeNode(2);
+    BinaryTreeNode2 *pNode3 = CreateBinaryTreeNode(3);
+    BinaryTreeNode2 *pNode4 = CreateBinaryTreeNode(4);
+    BinaryTreeNode2 *pNode5 = CreateBinaryTreeNode(5);
 
     ConnectTreeNodes(pNode2, nullptr, pNode3);
     ConnectTreeNodes(pNode3, nullptr, pNode4);
@@ -289,7 +289,7 @@ void Test12_15()
 
 void Test16()
 {
-    BinaryTreeNode *pNode5 = CreateBinaryTreeNode(5);
+    BinaryTreeNode2 *pNode5 = CreateBinaryTreeNode(5);
 
     Test("Test16", pNode5, nullptr);
 

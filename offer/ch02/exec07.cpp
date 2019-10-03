@@ -24,10 +24,10 @@
 
 
 #include "iostream"
-#include "ds/BinaryTreeNode.cpp"
+#include "ds/BinaryTreeNode2.cpp"
 
 
-BinaryTreeNode *do_construct(int *preOrderBegin, int *preOrderEnd,
+BinaryTreeNode2 *do_construct(int *preOrderBegin, int *preOrderEnd,
                              int *inOrderBegin, int *inOrderEnd)
 {
     // 当只有一个数字时，那么我们无需再递归，因为它就是二叉树的根节点
@@ -35,7 +35,7 @@ BinaryTreeNode *do_construct(int *preOrderBegin, int *preOrderEnd,
     // inOrderBegin == inOrderEnd 也必然成立
     if (preOrderBegin == preOrderEnd)
     {
-        return new BinaryTreeNode(*preOrderBegin, nullptr, nullptr);
+        return new BinaryTreeNode2(*preOrderBegin, nullptr, nullptr);
     }
     else if (preOrderBegin > preOrderEnd)
     {
@@ -52,13 +52,13 @@ BinaryTreeNode *do_construct(int *preOrderBegin, int *preOrderEnd,
     }
 
     int len = inOrderRoot - inOrderBegin;
-    BinaryTreeNode *left  = do_construct(preOrderRoot + 1, preOrderRoot + len, inOrderBegin, inOrderRoot - 1);
-    BinaryTreeNode *right = do_construct(preOrderRoot + len + 1, preOrderEnd, inOrderRoot + 1, inOrderEnd);
+    BinaryTreeNode2 *left  = do_construct(preOrderRoot + 1, preOrderRoot + len, inOrderBegin, inOrderRoot - 1);
+    BinaryTreeNode2 *right = do_construct(preOrderRoot + len + 1, preOrderEnd, inOrderRoot + 1, inOrderEnd);
 
-    return new BinaryTreeNode(root_value, left, right);
+    return new BinaryTreeNode2(root_value, left, right);
 }
 
-BinaryTreeNode *construct(int preOrder[], int inOrder[], int length)
+BinaryTreeNode2 *construct(int preOrder[], int inOrder[], int length)
 {
     if (preOrder == nullptr || inOrder == nullptr)
     {
@@ -86,7 +86,7 @@ void Test(char *testName, int *preorder, int *inorder, int length)
 
     try
     {
-        BinaryTreeNode *root = construct(preorder, inorder, length);
+        BinaryTreeNode2 *root = construct(preorder, inorder, length);
         PreOrderTraversal(root);
         std::cout << std::endl;
         InOrderTraversal(root);
@@ -211,14 +211,14 @@ int main(int argc, char *argv[])
 
 //int main()
 //{
-//    BinaryTreeNode root = {}, left = {}, right = {};
+//    BinaryTreeNode2 root = {}, left = {}, right = {};
 //    root.value  = 4;
 //    left.value  = 2;
 //    right.value = 5;
 //    root.left   = &left;
 //    root.right  = &right;
 //
-//    BinaryTreeNode left_left = {}, left_right = {};
+//    BinaryTreeNode2 left_left = {}, left_right = {};
 //    left_left.value  = 1;
 //    left_right.value = 3;
 //    root.left->left  = &left_left;
@@ -234,7 +234,7 @@ int main(int argc, char *argv[])
 //    int pre_order[5] = {4, 2, 1, 3, 5};
 //    int in_order[5]  = {1, 2, 3, 4, 5};
 //
-//    BinaryTreeNode *node = construct(pre_order, in_order, 5);
+//    BinaryTreeNode2 *node = construct(pre_order, in_order, 5);
 //
 //    PreOrderTraversal(node);
 //    std::cout << std::endl;
