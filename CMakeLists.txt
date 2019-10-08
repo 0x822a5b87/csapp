@@ -11,6 +11,6 @@ set(SOURCE_FILES
         leetcode)
 
 add_executable(csapp ${SOURCE_FILES})
-add_executable(offer offer/ch04/exec34.cpp offer/Utilities/BinaryTree.cpp)
+add_executable(offer offer/ch04/main.cpp offer/Utilities/BinaryTree.cpp)
 add_executable(main offer/ch04/main.cpp)
 add_executable(leetcode leetcode/easy/_709.cpp)

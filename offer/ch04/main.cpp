@@ -2,90 +2,109 @@
 // Created by 杜航宇 on 2019-09-25.
 //
 
-#include <vector>
+#include <set>
 #include "iostream"
 #include "../Utilities/BinaryTree.hpp"
 
-void PrintOuterRing(int **start, int initRow, int initCol, int width, int height)
+BinaryTreeNode *Convert(BinaryTreeNode *root)
 {
-    size_t currentRow = initRow, currentCol = initCol;
-
-    for (size_t times = 0; times < width; ++times)
+    if (root == nullptr)
     {
-        currentCol = initRow + times;
-        std::cout << start[currentRow][currentCol] << " ";
+        return nullptr;
     }
 
-    for (size_t times = 1; times < height; ++times)
+    std::cout << root->m_nValue << std::endl;
+
+    if (root->m_pLeft == nullptr && root->m_pRight == nullptr)
     {
-        currentRow = initRow + times;
-        std::cout << start[currentRow][currentCol] << " ";
+        return root;
     }
 
-    for (size_t times = 1; times < width; ++times)
+    BinaryTreeNode *left = Convert(root->m_pLeft);
+    if (left != nullptr)
     {
-        currentCol = currentCol - 1;
-        std::cout << start[currentRow][currentCol] << " ";
+        left->m_pRight = root;
+        root->m_pLeft = left;
     }
 
-    for (size_t times = 1; times < height - 1; ++times)
+    BinaryTreeNode *right = Convert(root->m_pRight);
+    if (right != nullptr)
     {
-        currentRow = currentRow - 1;
-        std::cout << start[currentRow][currentCol] << " ";
+        while (right->m_pLeft != nullptr)
+        {
+            right = right->m_pLeft;
+        }
+        root->m_pRight = right;
+        right->m_pLeft = root;
     }
+
+    return right;
+}
+
+BinaryTreeNode *DoConvert(BinaryTreeNode *root)
+{
+    if (root->m_pLeft != nullptr)
+    {
+        BinaryTreeNode *leftNode = DoConvert(root->m_pLeft);
+        while (leftNode->m_pRight != nullptr)
+        {
+            leftNode = leftNode->m_pRight;
+        }
+        leftNode->m_pRight = root;
+        root->m_pLeft  = leftNode;
+    }
+
+    if (root->m_pRight != nullptr)
+    {
+        BinaryTreeNode *rightNode = DoConvert(root->m_pRight);
+        while (rightNode->m_pLeft != nullptr)
+        {
+            rightNode = rightNode->m_pLeft;
+        }
+        root->m_pRight = rightNode;
+        rightNode->m_pLeft  = root;
+    }
+
+    return root;
+}
+
+BinaryTreeNode *Convert2(BinaryTreeNode *root)
+{
+    if (root == nullptr)
+    {
+        return nullptr;
+    }
+    BinaryTreeNode *node = DoConvert(root);
+    while (node->m_pLeft != nullptr)
+    {
+        node = node->m_pLeft;
+    }
+    return node;
 }
 
 int main()
 {
-    int rows = 4, columns = 4;
-    int **numbers = new int *[rows];
-//    for (int i = 0; i < rows; ++i)
-//    {
-//        numbers[i] = new int[columns];
-//        for (int j = 0; j < columns; ++j)
-//        {
-//            numbers[i][j] = i * columns + j + 1;
-//        }
-//    }
-//
-//    for (int i = 0; i < rows; ++i)
-//    {
-//        for (int j = 0; j < columns; ++j)
-//        {
-//            std::cout << numbers[i][j] << " ";
-//        }
-//        std::cout << std::endl;
-//    }
-//
-//    std::cout << std::endl;
-//
-//    PrintOuterRing(numbers, 0, 0, 4, 4);
-//    std::cout << std::endl << "1 2 3 4 8 12 16 15 14 13 9 5" << std::endl;
-//
-//    PrintOuterRing(numbers, 1, 1, 2, 2);
-//    std::cout << std::endl << "6 7 11 10" << std::endl;
+//    BinaryTreeNode *left_left   = CreateBinaryTreeNode(1);
+//    BinaryTreeNode *left_right  = CreateBinaryTreeNode(3);
+//    BinaryTreeNode *left        = CreateBinaryTreeNode(2);
+    BinaryTreeNode *root        = CreateBinaryTreeNode(3);
+    BinaryTreeNode *right       = CreateBinaryTreeNode(4);
+    BinaryTreeNode *right_right = CreateBinaryTreeNode(5);
 
+//    root->m_pLeft  = left;
+    root->m_pRight = right;
 
-    rows = 2, columns = 4;
-    numbers = new int *[rows];
-    for (int i = 0; i < rows; ++i)
+//    left->m_pLeft  = left_left;
+//    left->m_pRight = left_right;
+
+    right->m_pRight = right_right;
+
+    BinaryTreeNode *convertRoot = Convert(root);
+    while (convertRoot != nullptr)
     {
-        numbers[i] = new int[columns];
-        for (int j = 0; j < columns; ++j)
-        {
-            numbers[i][j] = i * columns + j + 1;
-        }
+        std::cout << convertRoot->m_nValue << std::endl;
+        convertRoot = convertRoot->m_pLeft;
     }
 
-    for (int i = 0; i < rows; ++i)
-    {
-        for (int j = 0; j < columns; ++j)
-        {
-            std::cout << numbers[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    std::cout << std::endl;
-    PrintOuterRing(numbers, 0, 0, 4, 2);
+    DestroyTree(root);
 }
