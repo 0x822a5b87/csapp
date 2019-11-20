@@ -57,3 +57,57 @@ typedef struct {
     long size;
 } Elf64_Symbol;
 ```
+
+### readelf
+
+对于通过 `g++ -c main.cpp -o main.o` 生成的目标代码，我们可以通过 `readelf -a main.o` 来读取（必须是 linux 下的 elf 文件）。也可以通过 `readelf -s main.o` 来读取 symbol 文件。
+
+1. Ndx == 1 表示 `.text`， Ndx == 3 表示 `.data`
+2. array 表示的是一个位于 `.data` 节的偏移量为 0 的 8 字节全局对象；
+3. main 表示的是一个为 `.text` 节的偏移量为 0 的 31 字节的全局函数；
+
+```c++
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+    12: 0000000000000000     8 OBJECT  GLOBAL DEFAULT    3 array
+    13: 0000000000000000    31 FUNC    GLOBAL DEFAULT    1 main
+    14: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT  UND _Z3sumPii
+```
+
+### exec 6.7
+
+```c++
+// swap.cpp
+extern int buf[];
+
+int *bufp0 = &buf[0];
+int *bufp1;
+
+void swap()
+{
+    // do something
+}
+```
+
+```c++
+void swap();
+
+int buf[2] = {1, 2};
+
+int main()
+{
+    swap();
+    return 0;
+}
+```
+
+1. buf 是一个生成在 `main.o` 的 `.data` 的外部全局对象
+2. bufp0 是一个生成在 `swap.o` 的 `.data` 的全局对象
+3. bufp1 是一个生成在 `swap.o` 的 `.bss` 的全局对象
+4. swap 是一个生成在 `swap.o` 的 `.text` 的全局函数
+
+### 目标文件
+
+1. .text 已编译程序的机器代码
+2. .data `已初始化的全局和静态 C 变量`
+3. .rodata 只读数据
+4. .bss 未初始化的全局和静态 C 变量

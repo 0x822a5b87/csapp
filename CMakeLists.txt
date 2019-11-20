@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
         CMU/p1_course_overview/memery_bug.cpp
-        CMU/p7/memery_bug.c
+        CMU/p7/exec/7.1/memery_bug.c
         CMU/
         offer
         leetcode)
