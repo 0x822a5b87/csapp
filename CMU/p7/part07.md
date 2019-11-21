@@ -195,6 +195,96 @@ gcc -static p.o libx.a liby.a
 gcc -static p.o libx.a liby.a libx.a
 ```
 
+## 7.7 重定位
+
+重定位分为两步：
+
+1. 重定位节和符号定义：将所有的节合并，例如 `a.o` 和 `b.o` 都包含了 `.data` 节，我们合并成一个新的 `.data` 节。同时所有的在 `.data` 节中的位置都改变了
+2. 重定位节中的符号引用：由于两个 `.data` 节合并了，所以我们必须将之前指向 `old.data` 的位置的符号引用指向新的 `.data` 位置
+
+### 7.7.1 重定位条目
+
+```c
+typedef struct
+{
+    long offset;
+    long type:32,
+         symbol: 32;
+    long addend;
+} Elf64_Rela;
+```
+
+An addend is simply something that should be added to the fixed up address to find the correct address. For example, if the relocation is for the symbol i because the original code is doing something like i[8] the addend will be set to 8. This means "find the address of i, and go 8 past it
+
+### 7.7.2 重定位符号引用
+
+```
+foreach section s {
+    foreach relocation entry s {
+        // 需要被重定位的指针
+        refptr = s + r.offset
+        
+        // 重定位相对引用
+        if (r.type == R_X86_64PC32) {
+            refaddr = ADDR(s) + r.offset
+            *refptr = (unsigned) (ADDR(r.symbol) + r.addend - refaddr)
+        }
+        
+        // 重定位绝对引用
+        if (r.type == R_X87_64_32) {
+            *refptr = (unsigned) (ADDR(r.symbol) + r.addend)
+        }
+    }
+}
+```
+
+#### 重定位PC相对引用
+
+1. 我们通过 `objdump -dx main.o` 编译 7.1 的目标代码得到以下汇编程序
+
+```asm
+0000000000000000 <_main>:
+   0:   55                      push   %rbp
+   1:   48 89 e5                mov    %rsp,%rbp
+   4:   48 83 ec 10             sub    $0x10,%rsp
+   8:   c7 45 fc 00 00 00 00    movl   $0x0,-0x4(%rbp)
+   f:   48 8d 3d 00 00 00 00    lea    0x0(%rip),%rdi        # 16 <_main+0x16>
+                        12: DISP32      _array
+  16:   be 02 00 00 00          mov    $0x2,%esi
+  1b:   e8 00 00 00 00          callq  20 <_main+0x20>
+                        1c: BRANCH32    __Z3sumPii
+  20:   89 45 f8                mov    %eax,-0x8(%rbp)
+  23:   8b 45 f8                mov    -0x8(%rbp),%eax
+  26:   48 83 c4 10             add    $0x10,%rsp
+  2a:   5d                      pop    %rbp
+  2b:   c3                      retq   
+
+```
+
+在这两行程序中
+
+```asm
+  1b:   e8 00 00 00 00          callq  20 <_main+0x20>
+                        1c: BRANCH32    __Z3sumPii
+```
+
+1. 我们知道 callq 后面跟着的 20 和 <_main+0x20> 是调用完 callq 之后需要执行的指令地址的两种表示形式
+2. callq 指令开始于偏移量 1b 的地方，包括 1 字节的操作码 e8，后面紧跟着的是对目标 sum 的 32 位 PC 相对引用的占位符。 **注意，这个时候我们的 call 指令调用的地址还是 00 00 00，因为目标文件是尚未链接的，我们还不知道我们将要调用的 sum 函数的实际地址**
+3. 通过 `1c: BRANCH32    __Z3sumPii` 我们知道我们要调用的函数，这个时候我们要将 `sum` 函数的实际地址来替换 <2> 提到的 `00 00 00`
+4. 我们的重定位条目属性为 offset = 1c, type = BRANCH32, symbol = sum, addend = -4
+5. 段的地址为 ADDR(s) = ADDR(.text)
+6. 符号的地址为 ADDR(r.symbol) = ADDR(sum)
+7. 所以我们 call 指令的地址为 refaddr = ADDR(s) + 0x1c
+8. 所以相对地址为 ADDR(sum) + r.addend - refaddr
+
+
+
+
+
+
+
+
+
 
 
 
