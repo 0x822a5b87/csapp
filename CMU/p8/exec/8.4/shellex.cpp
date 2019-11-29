@@ -51,6 +51,7 @@ void eval(char *cmdline)
         }
         else
         {
+            // 这里有个缺陷，我们的进程并没有回收后台子进程
             printf("%d %s", pid, cmdline);
         }
     }
