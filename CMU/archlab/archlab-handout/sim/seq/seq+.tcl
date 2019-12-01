@@ -241,7 +241,7 @@ proc simGo {} {
     # Disable the Go and Step buttons
     # Enable the Stop button
     while {$simGoOK} {
-	# run the simulator 1 cycle
+	# runcmd the simulator 1 cycle
 	after $simDelay
 	set simStat [simRun 1]
 	if {$simStat != "AOK" && $simStat != "BUB"} {set simGoOK 0}

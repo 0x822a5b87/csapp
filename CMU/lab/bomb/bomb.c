@@ -40,13 +40,13 @@ int main(int argc, char *argv[])
     /* Note to self: remember to port this bomb to Windows and put a 
      * fantastic GUI on it. */
 
-    /* When run with no arguments, the bomb reads its input lines 
+    /* When runcmd with no arguments, the bomb reads its input lines
      * from standard input. */
     if (argc == 1) {  
 	infile = stdin;
     } 
 
-    /* When run with one argument <file>, the bomb reads from <file> 
+    /* When runcmd with one argument <file>, the bomb reads from <file>
      * until EOF, and then switches to standard input. Thus, as you 
      * defuse each phase, you can add its defusing string to <file> and
      * avoid having to retype it. */

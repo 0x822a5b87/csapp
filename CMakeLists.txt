@@ -12,5 +12,6 @@ set(SOURCE_FILES
 
 add_executable(csapp ${SOURCE_FILES})
 add_executable(offer offer/ch05/exec39_1.cpp offer/Utilities/BinaryTree.cpp)
+add_executable(lab CMU/lab/shell-lab/tsh.c)
 add_executable(main offer/ch04/main.cpp)
 add_executable(leetcode leetcode/easy/_709.cpp)

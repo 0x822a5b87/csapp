@@ -24,7 +24,7 @@ psim		PIPE simulator
 
 The Y86-64 simulators can be configured to support TTY and GUI
 interfaces. A simulator running in TTY mode prints all information
-about its run-time behavior on the terminal.  It's harder to understand what's
+about its runcmd-time behavior on the terminal.  It's harder to understand what's
 going on, but useful for automated testing, and doesn't require any
 special installation features.  A simulator running in GUI mode uses a
 fancy graphical user interface.  Nice for visualizing and debugging,

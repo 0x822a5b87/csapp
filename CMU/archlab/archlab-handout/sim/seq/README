@@ -35,7 +35,7 @@ installation of Tcl/Tk on your system.
 
 The Makefile has simple instructions for building TTY or GUI
 simulators. A TTY simulator runs in TTY mode only. A GUI
-simulator can run in either TTY mode or GUI mode, according to 
+simulator can runcmd in either TTY mode or GUI mode, according to
 a command line argument.
 
 Once you've configured the Makefile, you can build the different

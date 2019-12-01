@@ -967,7 +967,7 @@ YY_DECL
 		*yy_cp = (yy_hold_char);
 
 		/* yy_bp points to the position in yy_ch_buf of the start of
-		 * the current run.
+		 * the current runcmd.
 		 */
 		yy_bp = yy_cp;
 
@@ -1157,7 +1157,7 @@ ECHO;
 			 * for us because it doesn't know how to deal
 			 * with the possibility of jamming (and we don't
 			 * want to build jamming into it because then it
-			 * will run more slowly).
+			 * will runcmd more slowly).
 			 */
 
 			yy_next_state = yy_try_NUL_trans( yy_current_state );

@@ -140,7 +140,7 @@ int sim_main(int argc, char **argv)
     if (gui_mode) {
 
 #ifndef HAS_GUI
-	printf("To run in GUI mode, you must recompile with the HAS_GUI constant defined.\n");
+	printf("To runcmd in GUI mode, you must recompile with the HAS_GUI constant defined.\n");
 	exit(1);
 #endif /* HAS_GUI */
 
@@ -169,7 +169,7 @@ int sim_main(int argc, char **argv)
 	exit(0);
     }
 
-    /* Otherwise, run the simulator in TTY mode (no -g flag) */
+    /* Otherwise, runcmd the simulator in TTY mode (no -g flag) */
     run_tty_sim();
 
     exit(0);
@@ -683,7 +683,7 @@ void tty_report(word_t cyc) {
 /* Run pipeline for one cycle */
 /* Return status of processor */
 /* Max_instr indicates maximum number of instructions that
-   want to complete during this simulation run.  */
+   want to complete during this simulation runcmd.  */
 static byte_t sim_step_pipe(word_t max_instr, word_t ccount)
 {
     byte_t wb_status = mem_wb_curr->status;
@@ -1228,7 +1228,7 @@ int Tcl_AppInit(Tcl_Interp *interp)
      * Specify a user-specific startup file to invoke if the application
      * is run interactively.  Typically the startup file is "~/.apprc"
      * where "app" is the name of the application.  If this line is deleted
-     * then no user-specific startup file will be run under any conditions.
+     * then no user-specific startup file will be runcmd under any conditions.
      */
     Tcl_SetVar(interp, "tcl_rcFileName", "~/.wishrc", TCL_GLOBAL_ONLY);
     return TCL_OK;

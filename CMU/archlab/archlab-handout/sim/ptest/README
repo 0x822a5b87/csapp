@@ -25,7 +25,7 @@ not implement the iaddq instruction.)
 
 When the test program detects an erroneous simulation, it leaves the
 .ys file in the directory (ordinarily it deletes the test code it
-generates).  You can then run a simulator (the GUI version is
+generates).  You can then runcmd a simulator (the GUI version is
 especially helpful here) on one of these failing cases.  Suppose the
 failing test is in file bad-test.ys.  Then you can execute "make
 bad-test.yo" to create the object code, and simulate it with one of

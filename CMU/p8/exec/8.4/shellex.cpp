@@ -19,7 +19,7 @@ void eval(char *cmdline)
 {
     char  *argv[MAX_ARGS];
     char  buf[MAXLINE];
-    int   bg;                       /* should the job run in bg or fg? */
+    int   bg;                       /* should the job runcmd in bg or fg? */
     pid_t pid;
 
     strcpy(buf, cmdline);

@@ -107,7 +107,7 @@ for ($i = 0; $i <= $blocklen+$over; $i++) {
     }
     $result = "failed";
     if ($stat =~ "zzzz") {
-	$result = "Couldn't run checking code";
+	$result = "Couldn't runcmd checking code";
     }
     if ($stat =~ "aaaa") {
 	$result = "OK";
