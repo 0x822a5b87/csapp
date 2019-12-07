@@ -1,8 +1,48 @@
-//
-// Created by 杜航宇 on 2019/12/5.
-//
+/*
+ * mm-naive.c - The fastest, least memory-efficient malloc package.
+ * 
+ * In this naive approach, a block is allocated by simply incrementing
+ * the brk pointer.  A block is pure payload. There are no headers or
+ * footers.  Blocks are never coalesced or reused. Realloc is
+ * implemented directly using mm_malloc and mm_free.
+ *
+ * NOTE TO STUDENTS: Replace this header comment with your own header
+ * comment that gives a high level description of your solution.
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <unistd.h>
+#include <string.h>
 
-#include "memlib.c"
+#include "mm.h"
+#include "memlib.h"
+
+/*********************************************************
+ * NOTE TO STUDENTS: Before you do anything else, please
+ * provide your team information in the following struct.
+ ********************************************************/
+team_t team = {
+        /* Team name */
+        "tx",
+        /* First member's full name */
+        "hangyudu",
+        /* First member's email address */
+        "hangyudu@yeah.net",
+        /* Second member's full name (leave blank if none) */
+        "",
+        /* Second member's email address (leave blank if none) */
+        ""
+};
+
+/* single word (4) or double word (8) alignment */
+#define ALIGNMENT 8
+
+/* rounds up to the nearest multiple of ALIGNMENT */
+#define ALIGN(size) (((size) + (ALIGNMENT-1)) & ~0x7)
+
+
+#define SIZE_T_SIZE (ALIGN(sizeof(size_t)))
 
 #define WSIZE 4                         // Word and header/footer size (bytes)
 #define DSIZE 8                         // Double word size (bytes)
@@ -37,18 +77,19 @@ static void *find_fit(size_t asize);
 
 static void place(void *bp, size_t asize);
 
-int mmm_init();
+int mm_init();
 
-void *mmm_malloc(size_t size);
+void *mm_malloc(size_t size);
 
+static char *heap_listp;        // always point to prologue block
 
 // 初始化堆
 // 第一个字是为了双字节对齐使用的填充字（因为 prologue block 双字，而 epilogue 单字）
 // 随后一个大小为 8 的已分配块作为 prologue bock
 // 以 0 结尾的 epilogue，仅有头没有尾
-int mmm_init()
+int mm_init()
 {
-    if ((heap_listp = mmem_sbrk(4 * WSIZE)) == (void *) -1)
+    if ((heap_listp = mem_sbrk(4 * WSIZE)) == (void *) -1)
     {
         return -1;
     }
@@ -130,7 +171,7 @@ static void *extend_heap(size_t words)
     char   *bp;
     size_t size;
     size           = (words % 2) ? (words + 1) * WSIZE : words * WSIZE;
-    if ((long) (bp = mmem_sbrk(size)) == -1)
+    if ((long) (bp = mem_sbrk(size)) == -1)
     {
         return NULL;
     }
@@ -144,7 +185,7 @@ static void *extend_heap(size_t words)
 
 void mm_free(void *bp)
 {
-    size_t size = GET_SIZE(bp);
+    size_t size = GET_SIZE(HDRP(bp));
     PUT(HDRP(bp), PACK(size, 0));
     PUT(FTRP(bp), PACK(size, 0));
     coalesce(bp);
@@ -183,4 +224,38 @@ static void *coalesce(void *bp)
 
     return bp;
 }
+
+
+/*
+ * mm_realloc - Implemented simply in terms of mm_malloc and mm_free
+ */
+void *mm_realloc(void *ptr, size_t size)
+{
+    void   *oldptr = ptr;
+    void   *newptr;
+    size_t copySize;
+
+    newptr = mm_malloc(size);
+    if (newptr == NULL)
+        return NULL;
+    copySize     = *(size_t *) ((char *) oldptr - SIZE_T_SIZE);
+    if (size < copySize)
+        copySize = size;
+    memcpy(newptr, oldptr, copySize);
+    mm_free(oldptr);
+    return newptr;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 

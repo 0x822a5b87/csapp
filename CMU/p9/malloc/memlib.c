@@ -7,14 +7,14 @@ static char *mem_brk;           // Points to last byte of heap plus 1
 static char *mem_max_addr;      // Max legal heap addr plus 1
 static char *heap_listp;        // always point to prologue block
 
-void mem_init()
+void mmem_init()
 {
     mem_heap     = (char *) malloc(MAX_HEAP);
     mem_brk      = (char *) mem_heap;
     mem_max_addr = (char *) (mem_heap + MAX_HEAP);
 }
 
-void *mem_sbrk(int incr)
+void *mmem_sbrk(int incr)
 {
     char *old_brk = mem_brk;
 

@@ -11,7 +11,6 @@ set(SOURCE_FILES
         leetcode)
 
 add_executable(csapp ${SOURCE_FILES})
-add_executable(offer offer/ch05/exec39_1.cpp offer/Utilities/BinaryTree.cpp)
-add_executable(lab CMU/lab/shell-lab/tsh.c)
+add_executable(offer CMU/lab/malloclab-handout/mdriver.c CMU/lab/malloclab-handout/fsecs.h CMU/lab/malloclab-handout/fsecs.c CMU/lab/malloclab-handout/fcyc.h CMU/lab/malloclab-handout/clock.h CMU/lab/malloclab-handout/memlib.h CMU/lab/malloclab-handout/config.h CMU/lab/malloclab-handout/mm.h CMU/lab/malloclab-handout/memlib.c CMU/lab/malloclab-handout/memlib.h CMU/lab/malloclab-handout/mm.c CMU/lab/malloclab-handout/mm.h CMU/lab/malloclab-handout/memlib.h CMU/lab/malloclab-handout/config.h CMU/lab/malloclab-handout/fcyc.c CMU/lab/malloclab-handout/ftimer.c CMU/lab/malloclab-handout/ftimer.h CMU/lab/malloclab-handout/config.h CMU/lab/malloclab-handout/clock.c CMU/lab/malloclab-handout/clock.h)
 add_executable(main offer/ch04/main.cpp)
 add_executable(leetcode leetcode/easy/_709.cpp)
