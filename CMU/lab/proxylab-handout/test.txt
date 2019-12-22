@@ -1,0 +1,53 @@
+listenfd = [4]
+GET /home.html HTTP/1.1
+Host: localhost:24510
+User-Agent: curl/7.54.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+listenfd = [4]
+listenfd = [4]
+GET /tiny.c HTTP/1.1
+Host: localhost:6647
+User-Agent: curl/7.54.0
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]
+listenfd = [4]

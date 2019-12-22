@@ -19,12 +19,13 @@ void echo(int connfd)
     printf("begin read\n");
     ssize_t n;
     while ((n = Rio_readlineb(&rio, rio.rio_buf, RIO_BUFSIZE)) != 0) {
-        if (!strcmp("quit", rio.rio_buf)) {
-            exit(0);
+        if (!strcmp("\r\n", rio.rio_buf)) {
+            break;
         }
         printf("read message : [%s], cnt = [%lu]\n", rio.rio_buf, n);
         Rio_writen(connfd, rio.rio_buf, n);
     }
+    printf("exit echo!");
 }
 
 int main(int argc, char **argv)
