@@ -8,10 +8,10 @@ set(SOURCE_FILES
         csapp/p7/exec/7.1/memery_bug.c
         csapp
         offer
-        leetcode)
+        leetcode
+        apue)
 
 add_executable(csapp ${SOURCE_FILES})
 add_executable(main offer/ch04/main.cpp)
 add_executable(leetcode leetcode/easy/_709.cpp)
 add_executable(server csapp/lab/proxylab-handout/csapp.c csapp/lab/proxylab-handout/proxy.c)
-#add_executable(offer csapp/lab/malloclab-handout/mdriver.c csapp/lab/malloclab-handout/fsecs.h csapp/lab/malloclab-handout/fsecs.c csapp/lab/malloclab-handout/fcyc.h csapp/lab/malloclab-handout/clock.h csapp/lab/malloclab-handout/memlib.h csapp/lab/malloclab-handout/config.h csapp/lab/malloclab-handout/mm.h csapp/lab/malloclab-handout/memlib.c csapp/lab/malloclab-handout/memlib.h csapp/lab/malloclab-handout/mm.c csapp/lab/malloclab-handout/mm.h csapp/lab/malloclab-handout/memlib.h csapp/lab/malloclab-handout/config.h csapp/lab/malloclab-handout/fcyc.c csapp/lab/malloclab-handout/ftimer.c csapp/lab/malloclab-handout/ftimer.h csapp/lab/malloclab-handout/config.h csapp/lab/malloclab-handout/clock.c csapp/lab/malloclab-handout/clock.h)
