@@ -120,3 +120,33 @@ void clr_fl(int fd, int flags)
     if (fcntl(fd, F_SETFL, val) < 0)
         err_sys("fcntl F_SETFL error");
 }
+
+#ifdef PATH_MAX
+static int pathmax = PATH_MAX;
+#else
+static int pathmax = 0;
+#endif
+
+char *path_alloc(int *size) {
+    char *ptr;
+
+    if (pathmax == 0) {
+        errno = 0;
+        if ( ( pathmax = pathconf("/", _PC_PATH_MAX) ) < 0 ) {
+            if ( errno == 0 )
+                pathmax = PATH_MAX_GUESS;
+            else
+                err_sys("pathconf error for _PC_PATH_MAX");
+        }
+        else
+            pathmax++;
+    }
+
+    if ( ( ptr = ((char*)malloc(pathmax + 1)) ) == NULL )
+        err_sys("malloc error for pathname");
+
+    if ( size != NULL )
+        *size = pathmax + 1;
+
+    return(ptr);
+}
