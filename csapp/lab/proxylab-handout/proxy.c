@@ -329,7 +329,7 @@ void init_log_fil()
 {
 //    FILE *fp = fopen(log_file_name, "w");
 //    fprintf(fp, "%s", "");
-//    fclose(fp);
+//    fclose.c(fp);
 }
 
 void log_file(const char *str)

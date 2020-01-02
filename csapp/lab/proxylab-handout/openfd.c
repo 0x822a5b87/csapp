@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 //    char ip[100];
 //    char port[100];
 //    char page[100];
-//    sscanf(text, "http://%99[^:]:%99[^/]%99[^\n]", ip, port, page);
+//    sscanf.c(text, "http://%99[^:]:%99[^/]%99[^\n]", ip, port, page);
 //    printf("ip = \"%s\"\n", ip);
 //    printf("port = \"%s\"\n", port);
 //    printf("page = \"%s\"\n", page);
