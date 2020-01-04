@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     ntot = nreg + ndir + nblk + nchr + nfifo + nslink + nsock;
     if (ntot == 0)
         ntot = 1;
-    printf("ntot = %d\n", ntot);
+    printf("ntot = %ld\n", ntot);
     printf("regular file = %7ld, %5.2f %%\n", nreg, nreg * 100.0 / ntot);
     printf("dir file = %7ld, %5.2f %%\n", nreg, ndir * 100.0 / ntot);
     printf("block file = %7ld, %5.2f %%\n", nblk, nreg * 100.0 / ntot);
