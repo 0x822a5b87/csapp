@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(SOURCE_FILES
         csapp/p1_course_overview/memery_bug.cpp
         csapp/p7/exec/7.1/memery_bug.c
+        offer/ch02/exec13.cpp
         csapp
         offer
         leetcode
@@ -15,3 +16,4 @@ add_executable(csapp ${SOURCE_FILES})
 add_executable(main offer/ch04/main.cpp)
 add_executable(leetcode leetcode/easy/_709.cpp)
 add_executable(server csapp/lab/proxylab-handout/csapp.c csapp/lab/proxylab-handout/proxy.c)
+add_executable(algorithm leetcode/article/001/edit_distance.c)
