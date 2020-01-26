@@ -7,10 +7,14 @@ set(SOURCE_FILES
         csapp/p1_course_overview/memery_bug.cpp
         csapp/p7/exec/7.1/memery_bug.c
         offer/ch02/exec13.cpp
+        apue/part10/constructor.cpp
         csapp
         offer
         leetcode
-        apue)
+        apue
+        effective_cpp
+        挑战程序设计竞赛
+        算法竞赛入门经典)
 
 add_executable(csapp ${SOURCE_FILES})
 add_executable(main offer/ch04/main.cpp)
