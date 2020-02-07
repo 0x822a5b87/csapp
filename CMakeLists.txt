@@ -13,12 +13,13 @@ set(SOURCE_FILES
         leetcode
         apue
         effective_cpp
+        snippet
         挑战程序设计竞赛
         算法竞赛入门经典)
 
 add_executable(csapp ${SOURCE_FILES})
-add_executable(main offer/ch04/main.cpp)
+add_executable(main offer/34.cpp)
 add_executable(leetcode leetcode/easy/_709.cpp)
 add_executable(server csapp/lab/proxylab-handout/csapp.c csapp/lab/proxylab-handout/proxy.c)
 add_executable(algorithm leetcode/article/001/edit_distance.c)
-add_executable(match 算法竞赛入门经典/part03/3.4/e/3-2.cpp)
+add_executable(match 算法竞赛入门经典/part04/4.4/p/4-3.cpp)

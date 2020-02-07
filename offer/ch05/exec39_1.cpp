@@ -64,32 +64,36 @@ int FindKthMaxValue(int *arr, int len, int k)
  * 对于 arr[i] < pivot，我们已经达到了了上面的那个状态。
  * 随后我们将 i + 1，并分别在剩余的两个数组中排序即可。
  */
-void QuickSort(int arr[], int head, int tail)
+void QuickSort(int arr[], int start, int end)
 {
-    if (head >= tail)
+    if (start >= end)
     {
         return;
     }
-    int i = head, j = tail, pivot = arr[head];
-    while (i < j)
+    int pivot = arr[start];
+    int left  = start, right = end;
+    while (left < right)
     {
-        while (arr[i] <= pivot && i < j)
+        while (arr[right] >= pivot && left < right)
         {
-            ++i;
+            --right;
         }
-        while (arr[j] >= pivot && i < j)
+        while (arr[left] <= pivot && left < right)
         {
-            --j;
+            ++left;
         }
-        std::swap(arr[i], arr[j]);
-    }
-    if (pivot > arr[i])
-    {
-        std::swap(arr[i], arr[head]);
+        std::swap(arr[left], arr[right]);
     }
 
-    QuickSort(arr, head, i - 1);
-    QuickSort(arr, j + 1, tail);
+    // 当执行到这里的时候，left == right
+    //
+    if (arr[left] <= arr[start])
+    {
+        std::swap(arr[left], arr[start]);
+    }
+
+    QuickSort(arr, start, left - 1);
+    QuickSort(arr, right + 1, end);
 }
 
 void QuickSort(int *arr, int len)
@@ -109,7 +113,7 @@ void quick_sort_recursive(T arr[], int start, int end)
         return;
     }
     T   pivot = arr[end];
-    int left  = start, right = end - 1;
+    int left  = start, right = end;
     while (left < right)
     { //在整个范围内搜寻比枢纽元值小或大的元素，然后将左侧元素与右侧元素交换
         while (arr[left] < pivot && left < right) //试图在左侧找到一个比枢纽元更大的元素
@@ -120,8 +124,6 @@ void quick_sort_recursive(T arr[], int start, int end)
     }
     if (arr[left] >= arr[end])
         std::swap(arr[left], arr[end]);
-    else
-        left++;
     quick_sort_recursive(arr, start, left - 1);
     quick_sort_recursive(arr, left + 1, end);
 }
@@ -136,8 +138,9 @@ void quick_sort(T arr[], int len)
 
 int main()
 {
-    int      arr0[] = {5, 1, 4, 6, 5, 3, 7};
-    for (int i      = 0; i != 7; ++i)
+    int arr0[] = {7, 3, 5, 1, 2, 8, 6, 9, 4};
+    size_t len = (sizeof(arr0) / sizeof(int));
+    for (int i      = 0; i != len; ++i)
     {
         std::cout << arr0[i] << " ";
     }
@@ -146,8 +149,16 @@ int main()
     // assert(FindKthMaxValue(arr0, 7, 2) == 8);
     // assert(FindKthMaxValue(arr0, 7, 3) == 7);
 
-    QuickSort(arr0, 7);
-    for (int i = 0; i != 7; ++i)
+    QuickSort(arr0, len);
+    for (int i = 0; i != len; ++i)
+    {
+        std::cout << arr0[i] << " ";
+    }
+
+    std::cout << std::endl;
+
+    quick_sort(arr0, len);
+    for (int i = 0; i != len; ++i)
     {
         std::cout << arr0[i] << " ";
     }
