@@ -18,7 +18,7 @@ set(SOURCE_FILES
         算法竞赛入门经典)
 
 add_executable(csapp ${SOURCE_FILES})
-add_executable(main offer/38.cpp)
+add_executable(main offer/41.cpp)
 add_executable(leetcode leetcode/easy/_709.cpp)
 add_executable(server csapp/lab/proxylab-handout/csapp.c csapp/lab/proxylab-handout/proxy.c)
 add_executable(algorithm leetcode/article/001/edit_distance.c)
