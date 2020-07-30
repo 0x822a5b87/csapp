@@ -60,8 +60,9 @@ int dfs(int s, int t, int f, std::vector<int> path)
 				int d = dfs(i, t, std::min(f, r[s][i]), path);
 				if (d > 0)
 				{
-					g[s][i] += d;
 					r[s][i] -= d;
+					g[i][s] += d;
+					std::cout << i << " " << s << " " << g[i][s] << std::endl;
 					return d;
 				} else {
 					path.pop_back();
